@@ -21,10 +21,10 @@
     <ClCompile Include="UserInterface.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="InputUtility.cpp">
+    <ClCompile Include="BitSwapper.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="BitSwapper.cpp">
+    <ClCompile Include="IOUtility.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="UserInterface.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="InputUtility.h">
+    <ClInclude Include="BitSwapper.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="BitSwapper.h">
+    <ClInclude Include="IOUtility.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

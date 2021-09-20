@@ -141,12 +141,12 @@
   <ItemGroup>
     <ClCompile Include="BitSwapper.cpp" />
     <ClCompile Include="EVM Lab1.cpp" />
-    <ClCompile Include="InputUtility.cpp" />
+    <ClCompile Include="IOUtility.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitSwapper.h" />
-    <ClInclude Include="InputUtility.h" />
+    <ClInclude Include="IOUtility.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
