@@ -1,16 +1,18 @@
 #pragma once
 #include <string>
-class IOUtility
+#include <sstream>
+#include <iostream>
+static class IOUtility
 {
 public:
 	template <typename T>
-	//lets not do koldunstvo with inlines and define this thing right here
 	static std::string BinaryRepresentation(T value)		
 	{
-		//remember about sizeof()
+		std::stringstream result;			//not the most optimal way, but at least it is simple and understandable
+		result << std::ios::bin << value;		
+		return result.str;
 	}
 
-	static void ClearCin();		//removes all input remnants from std::cin
 private:
 };
 
