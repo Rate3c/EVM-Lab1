@@ -1,7 +1,9 @@
 ﻿
 #include <iostream>
+#include "IOUtility.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
+    std::cout << IOUtility::BinaryRepresentation(0xFFF);
 }

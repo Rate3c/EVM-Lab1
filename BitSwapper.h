@@ -1,5 +1,5 @@
 #pragma once
-static class BitSwapper
+class BitSwapper
 {
 public:
 	
@@ -27,7 +27,7 @@ private:
 
 		int sizeOfTBits = sizeof(T) * 8;
 
-		return ((value >> (sizeOfTBits - (margin + 1)) << sizeOfTBits - 1) ^
+		return  (value >> (sizeOfTBits - (margin + 1)) << sizeOfTBits - 1) ^
 			    (value >> (sizeOfTBits - (margin + 2)) << sizeOfTBits - 1);
 	}
 };
