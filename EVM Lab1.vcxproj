@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitSwapper.cpp" />
-    <ClCompile Include="EVM Lab1.cpp" />
+    <ClCompile Include="EVMLab1.cpp" />
     <ClCompile Include="IOUtility.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
