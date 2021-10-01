@@ -1,20 +1,69 @@
 #pragma once
+#include <stdexcept>
+#include <iostream>
+#include "IOUtility.h"
 class BitSwapper
 {
 public:
 	
 	template <typename T>
 	//lets not do koldunstvo with inlines and define this thing right here
-	static T SwapNPairsStartingFromBitIndex(T value, int nPairs, int firstBitIndex)
+	static T SwapNPairsStartingFromBitIndex(const T& value, int nPairs, int firstBitIndex)
 	{
 		
+		switch (sizeof(T))
+		{
+		case 1:
+			return DoBitSwapWithInt<T,__int8>(value, nPairs, firstBitIndex);
+		case 2:
+			return DoBitSwapWithInt<T, __int16>(value, nPairs, firstBitIndex);
+		case 4:
+			return DoBitSwapWithInt<T, __int32>(value, nPairs, firstBitIndex);
+		case 8:
+			return DoBitSwapWithInt<T, __int64>(value, nPairs, firstBitIndex);
+		default:
+			throw std::invalid_argument("hehe funny ex go brrr");
+		}
+
+
 	}
 
 	
 
 private:
+	template <typename T1, typename T2>					//T1 is value we are working with, T2 is bit shiftable typename with same size as T1
+	static T1 DoBitSwapWithInt(T1 value, int nPairs, int firstBitIndex)
+	{
+		T2* valAsBitShiftable = reinterpret_cast<T2*>(&value);
+		std::cout << IOUtility::BinaryRepresentation(XorSwapBitSequence(*valAsBitShiftable, nPairs, firstBitIndex)) << std::endl;
+		T2 bitSwapSeq = XorSwapBitSequence(*valAsBitShiftable, nPairs, firstBitIndex);
+		
+		T2 result = bitSwapSeq ^ *valAsBitShiftable;
+		T1* resAsT1 = reinterpret_cast<T1*>(&result);
+		return *resAsT1;
+	}
+
+
 	template <typename T>
-	static bool _XorOnPairNBitsAway(T value, int margin)
+	static T XorSwapBitSequence(const T& value, int nPairs, int firstBitIndex)
+	{
+		T res = 0;
+		for (int i = 0; i < nPairs; i++)
+		{
+			res <<= 2;
+			if (XorOnPairNBitsAway(value, firstBitIndex + i * 2))
+			{
+				res = res | 0b11;
+			}
+			//else res | 0b00. meaningless line.
+		}
+		
+		res <<= (sizeof(T)*8 - (firstBitIndex + nPairs * 2));
+
+		return res;
+	}
+	template <typename T>
+	static bool XorOnPairNBitsAway(const T& value, int margin)
 	{
 		//spaghetti time!
 
@@ -27,8 +76,8 @@ private:
 
 		int sizeOfTBits = sizeof(T) * 8;
 
-		return  (value >> (sizeOfTBits - (margin + 1)) << sizeOfTBits - 1) ^
-			    (value >> (sizeOfTBits - (margin + 2)) << sizeOfTBits - 1);
+		return  ((value >> (sizeOfTBits - (margin + 2))) << (sizeOfTBits - 1)) ^
+			    ((value >> (sizeOfTBits - (margin + 1))) << (sizeOfTBits - 1));
 	}
 };
 
