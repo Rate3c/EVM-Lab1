@@ -32,7 +32,7 @@ private:
 		typename T1,			//typename of value to be processed
 		typename T2				//bit shiftable typename with size same as T1
 	>					
-	static T1 DoBitSwapWithInt(T1 value, int nPairs, int firstBitIndex)			//
+	static T1 DoBitSwapWithInt(T1 value, int nPairs, int firstBitIndex)	
 	{
 		if (sizeof(T1) != sizeof(T2))
 			throw std::invalid_argument("size of T1 != size of T2");
