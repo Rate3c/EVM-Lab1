@@ -11,7 +11,8 @@ public:
 	static T SwapNPairsStartingFromBitIndex(const T& value, int nPairs, int firstBitIndex)
 	{
 		
-		switch (sizeof(T))
+		switch (sizeof(T))				//chosing typename with same size as T
+										
 		{
 		case 1:
 			return DoBitSwapWithInt<T,__int8>(value, nPairs, firstBitIndex);
@@ -24,18 +25,20 @@ public:
 		default:
 			throw std::invalid_argument("hehe funny ex go brrr");
 		}
-
-
 	}
 
-	
-
 private:
-	template <typename T1, typename T2>					//T1 is value we are working with, T2 is bit shiftable typename with same size as T1
-	static T1 DoBitSwapWithInt(T1 value, int nPairs, int firstBitIndex)
+	template <
+		typename T1,			//typename of value to be processed
+		typename T2				//bit shiftable typename with size same as T1
+	>					
+	static T1 DoBitSwapWithInt(T1 value, int nPairs, int firstBitIndex)			//
 	{
+		if (sizeof(T1) != sizeof(T2))
+			throw std::invalid_argument("size of T1 != size of T2");
+
 		T2* valAsBitShiftable = reinterpret_cast<T2*>(&value);
-		std::cout << IOUtility::BinaryRepresentation(XorSwapBitSequence(*valAsBitShiftable, nPairs, firstBitIndex)) << std::endl;
+		
 		T2 bitSwapSeq = XorSwapBitSequence(*valAsBitShiftable, nPairs, firstBitIndex);
 		
 		T2 result = bitSwapSeq ^ *valAsBitShiftable;
@@ -51,10 +54,9 @@ private:
 		for (int i = 0; i < nPairs; i++)
 		{
 			res <<= 2;
-			if (XorOnPairNBitsAway(value, firstBitIndex + i * 2))
-			{
+			if (BitsInPairNBitsAwayAreDifferent(value, firstBitIndex + i * 2))
 				res = res | 0b11;
-			}
+
 			//else res | 0b00. meaningless line.
 		}
 		
@@ -63,7 +65,7 @@ private:
 		return res;
 	}
 	template <typename T>
-	static bool XorOnPairNBitsAway(const T& value, int margin)
+	static bool BitsInPairNBitsAwayAreDifferent(const T& value, int margin)
 	{
 		//spaghetti time!
 
@@ -71,8 +73,6 @@ private:
 		// then we shift it back sizeof(T)-1 blocks back. The first bit in resulting block is the first bit of pair now (all other bits are set to 0)
 		// then we do the same, but for the second bit of pair
 		// then... we use binary Xor! If bit1==bit2, the result will be nothing but zero, and this thing will return false
-		
-		// I havent tested it tho
 
 		int sizeOfTBits = sizeof(T) * 8;
 

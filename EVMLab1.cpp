@@ -5,7 +5,13 @@
 
 int main()
 {
-    std::cout << IOUtility::BinaryRepresentation(0b00000101000111010100101001010010) << std::endl;
-    std::cout << IOUtility::BinaryRepresentation(BitSwapper::SwapNPairsStartingFromBitIndex(0b00000101000111010100101001010010, 8, 16)) << std::endl;
+    float testVal = 33.08f;
+    std::cout << "Example:" << std::endl;
+    std::cout << "Original value: " << testVal << std::endl;
+    std::cout << "In binary: " << IOUtility::BinaryRepresentation(testVal) << std::endl;
+
+    float res = BitSwapper::SwapNPairsStartingFromBitIndex(testVal, 8, 8);
+    std::cout << "With 8 pairs swapped starting from bit[8]: " << IOUtility::BinaryRepresentation(res) << std::endl;
+    std::cout << "In decimal: " << res << std::endl;
 
 }
