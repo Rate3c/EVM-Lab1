@@ -14,12 +14,6 @@ public:
 		
 		long long valueAsBitShiftable = *(reinterpret_cast<long long*>(&value));
 		
-		//valueAsBitShiftable <<= sizeDeltaBits;
-
-		//valueAsBitShiftable >>= sizeDeltaBits;
-
-		
-		//std::cout << valueAsBitShiftable << std::endl;
 		for (int i= sizeof(T) * 8-1; i>=0; i--)
 		{
 			result[i] = 
@@ -30,7 +24,6 @@ public:
 
 		return result;
 	}
-
 private:
 };
 

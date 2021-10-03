@@ -3,6 +3,7 @@ class UserInterface
 {
 public:
 	void showValueInputInterface();		//only value input
-	void swowBitSwapInterface();		//input interface for first bit index, num of pairs, etc
+private:
+	void showBitSwapInterface(float value);		//input interface for first bit index, num of pairs, etc
 };
 
