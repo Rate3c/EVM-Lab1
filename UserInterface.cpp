@@ -68,7 +68,7 @@ void UserInterface::showBitSwapInterface(float value)
             std::cin.clear();
             std::cin.ignore(100100, '\n');
         }
-        else if ((sizeof(value) * 8 - index) <= (Npairs * 2)) {  // check for the required number of bits for swap
+        else if ((sizeof(value) * 8 - index) < (Npairs * 2)) {  // check for the required number of bits for swap
 
             std::cout << "ERROR! Not enough bits to swap " << Npairs << " pairs! Choose a smaller suitable beginning of swap. " << std::endl << std::endl;
             std::cin.clear();
