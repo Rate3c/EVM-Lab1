@@ -3,8 +3,7 @@
 #include "IOUtility.h"
 #include "BitSwapper.h"
 
-int main()
-{
+int main() {
     UserInterface ui;
     ui.showValueInputInterface();
 }

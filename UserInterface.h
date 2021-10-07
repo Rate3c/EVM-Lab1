@@ -47,8 +47,27 @@ private:
 
         T result = BitSwapper::SwapNPairsStartingFromBitIndex(value, Npairs, index);  // swap function
         std::cout << "With " << Npairs << " pairs swapped starting from bit[" << index << "]: " << IOUtility::BinaryRepresentation(result) << std::endl; // binary representation of swaped input value
-        std::cout << "In decimal: " << result << std::endl;
+        std::cout << "In decimal: " << result << std::endl << std::endl;
     }
 
+    template <typename T>
+    T InputValue() { // valitating of input type
+        T inValue;
+        while (true) {
+            std::cout << "1.Enter your nubmer: ";
+            std::cin >> inValue; std::cout << std::endl;
+            if (!std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(100100, '\n');
+                break;
+            }
+            else {
+                std::cout << "ERROR! Wrong type input!" << std::endl << std::endl;
+                std::cin.clear();
+                std::cin.ignore(100100, '\n');
+            }
+        }
+        return inValue;
+    }
 };
 

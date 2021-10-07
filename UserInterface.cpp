@@ -5,41 +5,32 @@
 
 void UserInterface::showValueInputInterface()
 {
-    long double inputValue;
-    float floatValue;
-    unsigned long ulValue;
     int choice;
+    bool call = true;
+    std::cout << "Choose the type:\n 1.float \n 2.unsigned long (When entering a floating point number, the fractional part is discarded)\n 3. Exit programm. \n" << std::endl;
 
-    while (true) {
-        std::cout << "1.Enter your nubmer: ";
-        std::cin >> inputValue; std::cout << std::endl;
-        if (!std::cin)
-        {
-            std::cout << "ERROR! Incorrect input!" << std::endl << std::endl;
-            std::cin.clear();
-            std::cin.ignore(100100, '\n');
-        }
-        else break;
-    }
-    std::cout << "Choose the type:\n 1.float \n 2.unsigned long\n";
-    
-    while (true) {
+    while (call) {
         std::cout << "Your choice: ";
-        std::cin >> choice;
-        if (choice == 1) {
-            floatValue = (float)inputValue;
-            showBitSwapInterface(floatValue);
+        std::cin >> choice; std::cout << std::endl;
+        switch (choice){
+        case 1: {
+            showBitSwapInterface(InputValue<float>());
             break;
         }
-        else if (choice == 2) {
-            ulValue = (unsigned long)inputValue;
-            showBitSwapInterface(ulValue);
+        case 2: {
+            showBitSwapInterface(InputValue<unsigned long>());
             break;
         }
-        else {
+        case 3: {
+            std::cout << "\nExiting..." << std::endl; //exit
+            call = false;
+            break;
+        }
+        default: {
             std::cin.clear();
             std::cin.ignore(100100, '\n');
             std::cout << "Wrong input!\n" << std::endl;
+        }
         }
     }
 }
